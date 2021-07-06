@@ -11,6 +11,8 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.Date;
 
 import static org.junit.Assert.*;
@@ -31,16 +33,17 @@ public class ShopServiceTest extends BaseTest {
         shop.setOwner(owner);
         shop.setArea(area);
         shop.setShopCategory(shopCategory);
-        shop.setShopName("测试的店铺1");
-        shop.setShopDesc("test1");
-        shop.setShopAddr("test1");
-        shop.setPhone("test");
+        shop.setShopName("测试的店铺3");
+        shop.setShopDesc("test3");
+        shop.setShopAddr("test3");
+        shop.setPhone("test3");
         shop.setCreateTime(new Date());
         shop.setEnableStatus(1);
         shop.setEnableStatus(ShopStateEnum.CHECK.getState());
         shop.setAdvice("审核中");
         File shopImg = new File("D:\\dev\\xiaohuangren.jpg");
-        ShopExecution shopExecution = shopService.addShop(shop, shopImg);
+        InputStream is = new FileInputStream(shopImg);
+        ShopExecution shopExecution = shopService.addShop(shop,is, shopImg.getName());
         //因为成功了，才是CHECK的状态，不是的话，就是ShopOperationException抛出来了
         //这个返回的对象就是成功的时候才会返回，而且把值给设置进去了
         assertEquals(ShopStateEnum.CHECK.getState(),shopExecution.getState());

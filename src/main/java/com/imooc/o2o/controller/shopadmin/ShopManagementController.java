@@ -5,6 +5,7 @@ import com.imooc.o2o.dto.ShopExecution;
 import com.imooc.o2o.entity.PersonInfo;
 import com.imooc.o2o.entity.Shop;
 import com.imooc.o2o.enums.ShopStateEnum;
+import com.imooc.o2o.exceptions.ShopOperationException;
 import com.imooc.o2o.service.ShopService;
 import com.imooc.o2o.util.HttpServletRequestUtil;
 import com.imooc.o2o.util.ImageUtils;
@@ -48,14 +49,18 @@ public class ShopManagementController {
             return modelMap;
         }
         /*
-        * 说一下这里的整体逻辑，前端传过来的不是File类型的，我们只能用CommonsMultipartFile来接收
-        * 然后需要一个解析器来解析，看看session中是否有文件，有的话就强转成CommonsMultipartFile类型的
-        * 在service中，我们传的是File类型的，但是这里是CommonsMultipartFile的，不能直接传
-        * 而且CommonsMultipartFile也不能转换成File类型的，那怎么办？CommonsMultipartFile
-        * 里面有个getInputStream方法，转换成流，那就可以一个输入一个输出，
-        * 这里采取的就是先创建一个文件，目录啥的在哪都行，我们就是把
-        * 它当成一个临时的容器，写进去之后，传给addShop方法，这个方法不好，得重构
-        */
+         * 说一下这里的整体逻辑，前端传过来的不是File类型的，我们只能用CommonsMultipartFile来接收
+         * 然后需要一个解析器来解析，看看session中是否有文件，有的话就强转成CommonsMultipartFile类型的
+         * 在service中，我们传的是File类型的，但是这里是CommonsMultipartFile的，不能直接传
+         * 而且CommonsMultipartFile也不能转换成File类型的，那怎么办？CommonsMultipartFile
+         * 里面有个getInputStream方法，转换成流，那就可以一个输入一个输出，
+         * 这里采取的就是先创建一个文件，目录啥的在哪都行，我们就是把
+         * 它当成一个临时的容器，写进去之后，传给addShop方法，这个方法不好，得重构
+         *
+         * CommonsMultipartFile这个里面通过getOriginalFilename可以获取到文件名，所以，重构了
+         * 把原来的File 可以直接传，可以获取文件名，拆分成了
+         * CommonsMultipartFile获取文件流inputStream 和名字，就是拆成两个参数了。
+         */
         CommonsMultipartFile shopImg = null;
         CommonsMultipartResolver commonsMultipartResolver = new CommonsMultipartResolver(
                 request.getSession().getServletContext());
@@ -75,28 +80,20 @@ public class ShopManagementController {
             PersonInfo owner = new PersonInfo();
             owner.setUserId(1L);
             shop.setOwner(owner);
-            File shopImgFile = new File(PathUtil.getImgBasePath() + ImageUtils.getRandomFileName());
+            ShopExecution se = null;
             try {
-                shopImgFile.createNewFile();
-            } catch (IOException e) {
+                se = shopService.addShop(shop, shopImg.getInputStream(), shopImg.getOriginalFilename());
+                if (se.getState() == ShopStateEnum.CHECK.getState()) {
+                    modelMap.put("success", true);
+                } else {
+                    modelMap.put("success", false);
+                    modelMap.put("errMsg", "请输入店铺信息");
+                }
+            } catch (IOException | ShopOperationException e) {
                 modelMap.put("success", false);
                 modelMap.put("errMsg", e.getMessage());
-                return modelMap;
             }
-            try {
-                inputStreamToFile(shopImg.getInputStream(),shopImgFile);
-            } catch (IOException e) {
-                modelMap.put("success", false);
-                modelMap.put("errMsg", e.getMessage());
-                return modelMap;
-            }
-            ShopExecution se = shopService.addShop(shop, shopImgFile);
-            if(se.getState() == ShopStateEnum.CHECK.getState()){
-                modelMap.put("success",true);
-            }else{
-                modelMap.put("success",false);
-                modelMap.put("errMsg","请输入店铺信息");
-            }
+
             return modelMap;
         } else {
             modelMap.put("success", false);
@@ -106,17 +103,17 @@ public class ShopManagementController {
         //3.注册结果
     }
 
-    private static void inputStreamToFile(InputStream ins, File file) {
-
-        try (InputStream inputStream = ins;
-             FileOutputStream os = new FileOutputStream(file)) {
-            int bytesRead = 0;
-            byte[] buffer = new byte[1024];
-            while ((bytesRead = inputStream.read(buffer)) != -1) {
-                os.write(buffer, 0, bytesRead);
-            }
-        } catch (Exception e) {
-            throw new RuntimeException("调用inputStreamToFile产生异常" + e.getMessage());
-        }
-    }
+//    private static void inputStreamToFile(InputStream ins, File file) {
+//
+//        try (InputStream inputStream = ins;
+//             FileOutputStream os = new FileOutputStream(file)) {
+//            int bytesRead = 0;
+//            byte[] buffer = new byte[1024];
+//            while ((bytesRead = inputStream.read(buffer)) != -1) {
+//                os.write(buffer, 0, bytesRead);
+//            }
+//        } catch (Exception e) {
+//            throw new RuntimeException("调用inputStreamToFile产生异常" + e.getMessage());
+//        }
+//    }
 }

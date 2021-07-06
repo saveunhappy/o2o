@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.Date;
 
 @Service
@@ -24,7 +25,7 @@ public class ShopServiceImpl implements ShopService {
 
     @Override
     @Transactional
-    public ShopExecution addShop(Shop shop, File shopImg) {
+    public ShopExecution addShop(Shop shop, InputStream shopImgInputStream,String fileName) {
         //空值判断
         if (shop == null) {
             return new ShopExecution(ShopStateEnum.NULL_SHOP);
@@ -39,10 +40,10 @@ public class ShopServiceImpl implements ShopService {
             if (effecedNum <= 0) {
                 throw new ShopOperationException("店铺创建失败");
             } else {
-                if (shopImg != null) {
+                if (shopImgInputStream != null) {
                     //存储图片
                     try {
-                        addShopImg(shop, shopImg);
+                        addShopImg(shop, shopImgInputStream,fileName);
                     } catch (Exception e) {
                         throw new ShopOperationException("addShopImg error:" + e.getMessage());
                     }
@@ -60,10 +61,10 @@ public class ShopServiceImpl implements ShopService {
         return new ShopExecution(ShopStateEnum.CHECK,shop);
     }
 
-    private void addShopImg(Shop shop, File shopImg) {
+    private void addShopImg(Shop shop, InputStream shopImgInputStream,String fileName) {
         //获取shop图片目录的相对值路径
         String dest = PathUtil.getShopImagePath(shop.getShopId());
-        String shopImgAddr = ImageUtils.generateThumbnail(shopImg,dest);
+        String shopImgAddr = ImageUtils.generateThumbnail(shopImgInputStream,fileName,dest);
         shop.setShopImg(shopImgAddr);
     }
 }
