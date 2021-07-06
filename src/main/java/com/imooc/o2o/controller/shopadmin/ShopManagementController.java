@@ -47,6 +47,15 @@ public class ShopManagementController {
             modelMap.put("errMsg", e.getMessage());
             return modelMap;
         }
+        /*
+        * 说一下这里的整体逻辑，前端传过来的不是File类型的，我们只能用CommonsMultipartFile来接收
+        * 然后需要一个解析器来解析，看看session中是否有文件，有的话就强转成CommonsMultipartFile类型的
+        * 在service中，我们传的是File类型的，但是这里是CommonsMultipartFile的，不能直接传
+        * 而且CommonsMultipartFile也不能转换成File类型的，那怎么办？CommonsMultipartFile
+        * 里面有个getInputStream方法，转换成流，那就可以一个输入一个输出，
+        * 这里采取的就是先创建一个文件，目录啥的在哪都行，我们就是把
+        * 它当成一个临时的容器，写进去之后，传给addShop方法，这个方法不好，得重构
+        */
         CommonsMultipartFile shopImg = null;
         CommonsMultipartResolver commonsMultipartResolver = new CommonsMultipartResolver(
                 request.getSession().getServletContext());
