@@ -2,16 +2,21 @@ package com.imooc.o2o.controller.shopadmin;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.imooc.o2o.dto.ShopExecution;
+import com.imooc.o2o.entity.Area;
 import com.imooc.o2o.entity.PersonInfo;
 import com.imooc.o2o.entity.Shop;
+import com.imooc.o2o.entity.ShopCategory;
 import com.imooc.o2o.enums.ShopStateEnum;
 import com.imooc.o2o.exceptions.ShopOperationException;
+import com.imooc.o2o.service.AreaService;
+import com.imooc.o2o.service.ShopCategoryService;
 import com.imooc.o2o.service.ShopService;
 import com.imooc.o2o.util.HttpServletRequestUtil;
 import com.imooc.o2o.util.ImageUtils;
 import com.imooc.o2o.util.PathUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -24,7 +29,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -32,6 +39,29 @@ import java.util.Map;
 public class ShopManagementController {
     @Autowired
     private ShopService shopService;
+    @Autowired
+    private ShopCategoryService shopCategoryService;
+    @Autowired
+    private AreaService areaService;
+
+    @GetMapping("getshopinitinfo")
+    @ResponseBody
+    private Map<String, Object> getShopInitInfo() {
+        Map<String, Object> modelMap = new HashMap<>();
+        List<ShopCategory> shopCategoryList = new ArrayList<>();
+        List<Area> areaList = new ArrayList<>();
+        try {
+            shopCategoryList = shopCategoryService.getShopCategoryList(new ShopCategory());
+            areaList = areaService.getAreaList();
+            modelMap.put("shopCategoryList",shopCategoryList);
+            modelMap.put("areaList",areaList);
+            modelMap.put("success",true);
+        } catch (Exception e) {
+            modelMap.put("success",false);
+            modelMap.put("errMsg",false);
+        }
+        return modelMap;
+    }
 
     @PostMapping("/registershop")
     @ResponseBody
