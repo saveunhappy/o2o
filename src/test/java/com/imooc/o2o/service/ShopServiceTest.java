@@ -48,5 +48,4 @@ public class ShopServiceTest extends BaseTest {
         //这个返回的对象就是成功的时候才会返回，而且把值给设置进去了
         assertEquals(ShopStateEnum.CHECK.getState(),shopExecution.getState());
     }
-
 }
