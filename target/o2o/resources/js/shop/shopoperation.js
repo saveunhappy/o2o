@@ -39,11 +39,11 @@ $(function () {
                     return !this.selected;
                 }).data('id')
             };
-            var shopImg = $("#shop-img")[0].file[0];
+            var shopImg = $("#shop-img")[0].files[0];
             var formData = new FormData();
             formData.append('shopImg',shopImg);
             formData.append('shopStr',JSON.stringify(shop));
-            var verifyCodeActual = $('#captcha_img').val();
+            var verifyCodeActual = $('#j_captcha').val();
             if(!verifyCodeActual){
                 $.toast('请输入验证码');
                 return;
