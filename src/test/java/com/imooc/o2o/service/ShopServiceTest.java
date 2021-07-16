@@ -20,8 +20,21 @@ import static org.junit.Assert.*;
 public class ShopServiceTest extends BaseTest {
     @Autowired
     private ShopService shopService;
+
     @Test
-    public void testAddShop() throws Exception{
+    public void testModifyShop() throws Exception {
+        Shop shop = new Shop();
+        shop.setShopId(1L);
+        File shopImg = new File("D:\\360downloads\\2.jpg");
+        InputStream inputStream = new FileInputStream(shopImg);
+        ShopExecution shopExecution = shopService.modifyShop(shop, inputStream, "2.jpg");
+        System.out.println("新的图片地址为：" + shopExecution.getShop().getShopImg());
+
+    }
+
+
+    @Test
+    public void testAddShop() throws Exception {
         Shop shop = new Shop();
         PersonInfo owner = new PersonInfo();
         Area area = new Area();
@@ -43,9 +56,9 @@ public class ShopServiceTest extends BaseTest {
         shop.setAdvice("审核中");
         File shopImg = new File("D:\\dev\\xiaohuangren.jpg");
         InputStream is = new FileInputStream(shopImg);
-        ShopExecution shopExecution = shopService.addShop(shop,is, shopImg.getName());
+        ShopExecution shopExecution = shopService.addShop(shop, is, shopImg.getName());
         //因为成功了，才是CHECK的状态，不是的话，就是ShopOperationException抛出来了
         //这个返回的对象就是成功的时候才会返回，而且把值给设置进去了
-        assertEquals(ShopStateEnum.CHECK.getState(),shopExecution.getState());
+        assertEquals(ShopStateEnum.CHECK.getState(), shopExecution.getState());
     }
 }

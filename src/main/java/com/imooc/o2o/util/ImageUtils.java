@@ -106,4 +106,26 @@ public class ImageUtils {
                 .outputQuality(0.8f).toFile("D:\\dev\\xiaohuangren2.jpg");
     }
 
+    /*
+     * storePath是文件的路径还是目录的路径
+     * 如果storePath是文件路径则删除文件
+     * 如果storePath是目录路径则删除目录
+     * @param storePath
+     */
+    @SuppressWarnings("ResultOfMethodCallIgnored")
+    public static void deleteFileOrPath(String storePath){
+        File fileOrPath = new File(PathUtil.getImgBasePath() + storePath);
+        if(fileOrPath.exists()){
+            if(fileOrPath.isDirectory()){
+                File[] files= fileOrPath.listFiles();
+                //必须不能为null，否则会空指针异常
+                assert files != null;
+                for (File file : files) {
+                    file.delete();
+                }
+            }
+            //不管是文件还是文件夹，都是要删除的，所以这行代码放到最后
+            fileOrPath.delete();
+        }
+    }
 }
