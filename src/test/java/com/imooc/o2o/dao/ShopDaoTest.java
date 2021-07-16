@@ -17,7 +17,14 @@ public class ShopDaoTest extends BaseTest {
     @Autowired
     private ShopDao shopDao;
     @Test
-   // @Ignore
+    public void testQueryByShopId() throws Exception{
+        long shopId = 1;
+        Shop shop = shopDao.queryByShopId(shopId);
+        System.out.println("areaId : " + shop.getArea().getAreaId());
+        System.out.println("areaName : " + shop.getArea().getAreaName());
+    }
+    @Test
+    @Ignore
     public void testInsertShop() {
         Shop shop = new Shop();
         PersonInfo owner = new PersonInfo();
@@ -43,6 +50,7 @@ public class ShopDaoTest extends BaseTest {
     }
 
     @Test
+    @Ignore
     public void testUpdateShop() {
         Shop shop = new Shop();
         shop.setShopId(1L);
