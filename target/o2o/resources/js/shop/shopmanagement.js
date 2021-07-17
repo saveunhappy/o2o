@@ -5,7 +5,7 @@ $(function() {
 		if (data.redirect) {
 			window.location.href = data.url;
 		} else {
-			if (data.shopId != undefined && data.shopId != null) {
+			if (data.shopId !== undefined) {
 				shopId = data.shopId;
 			}
 			$('#shopInfo')

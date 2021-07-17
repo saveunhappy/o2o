@@ -31,7 +31,6 @@
         SELECT s.shop_id,
         s.shop_name,
         s.shop_desc,
-        s.shop_desc,
         s.shop_addr,
         s.shop_img,
         s.priority,
