@@ -23,6 +23,7 @@ Date.prototype.Format = function(fmt) {
  */
 function changeVerifyCode(img) {
 	//把这个resources文件夹当做是web-info就行，直接退一级，去寻找web.xml文件
+	//这个就是生成一个四位的随机数
 	img.src = "../Kaptcha?" + Math.floor(Math.random() * 100);
 }
 /**

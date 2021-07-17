@@ -7,6 +7,7 @@ import com.imooc.o2o.entity.PersonInfo;
 import com.imooc.o2o.entity.Shop;
 import com.imooc.o2o.entity.ShopCategory;
 import com.imooc.o2o.enums.ShopStateEnum;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -21,7 +22,33 @@ public class ShopServiceTest extends BaseTest {
     @Autowired
     private ShopService shopService;
     @Test
-    public void testAddShop() throws Exception{
+    public void testGetShopList() throws Exception{
+        Shop shopCondition = new Shop();
+        ShopCategory sc = new ShopCategory();
+        sc.setShopCategoryId(2L);
+        shopCondition.setShopCategory(sc);
+        ShopExecution se = shopService.getShopList(shopCondition, 2, 2);
+        System.out.println("店铺列表数为："+se.getShopList().size());
+        System.out.println("店铺总数为："+se.getCount());
+
+    }
+
+    @Test
+    @Ignore
+    public void testModifyShop() throws Exception {
+        Shop shop = new Shop();
+        shop.setShopId(1L);
+        File shopImg = new File("D:\\360downloads\\2.jpg");
+        InputStream inputStream = new FileInputStream(shopImg);
+        ShopExecution shopExecution = shopService.modifyShop(shop, inputStream, "2.jpg");
+        System.out.println("新的图片地址为：" + shopExecution.getShop().getShopImg());
+
+    }
+
+
+    @Test
+    @Ignore
+    public void testAddShop() throws Exception {
         Shop shop = new Shop();
         PersonInfo owner = new PersonInfo();
         Area area = new Area();
@@ -43,9 +70,9 @@ public class ShopServiceTest extends BaseTest {
         shop.setAdvice("审核中");
         File shopImg = new File("D:\\dev\\xiaohuangren.jpg");
         InputStream is = new FileInputStream(shopImg);
-        ShopExecution shopExecution = shopService.addShop(shop,is, shopImg.getName());
+        ShopExecution shopExecution = shopService.addShop(shop, is, shopImg.getName());
         //因为成功了，才是CHECK的状态，不是的话，就是ShopOperationException抛出来了
         //这个返回的对象就是成功的时候才会返回，而且把值给设置进去了
-        assertEquals(ShopStateEnum.CHECK.getState(),shopExecution.getState());
+        assertEquals(ShopStateEnum.CHECK.getState(), shopExecution.getState());
     }
 }
