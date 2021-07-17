@@ -7,6 +7,7 @@ import com.imooc.o2o.entity.PersonInfo;
 import com.imooc.o2o.entity.Shop;
 import com.imooc.o2o.entity.ShopCategory;
 import com.imooc.o2o.enums.ShopStateEnum;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -20,8 +21,20 @@ import static org.junit.Assert.*;
 public class ShopServiceTest extends BaseTest {
     @Autowired
     private ShopService shopService;
+    @Test
+    public void testGetShopList() throws Exception{
+        Shop shopCondition = new Shop();
+        ShopCategory sc = new ShopCategory();
+        sc.setShopCategoryId(2L);
+        shopCondition.setShopCategory(sc);
+        ShopExecution se = shopService.getShopList(shopCondition, 2, 2);
+        System.out.println("店铺列表数为："+se.getShopList().size());
+        System.out.println("店铺总数为："+se.getCount());
+
+    }
 
     @Test
+    @Ignore
     public void testModifyShop() throws Exception {
         Shop shop = new Shop();
         shop.setShopId(1L);
@@ -34,6 +47,7 @@ public class ShopServiceTest extends BaseTest {
 
 
     @Test
+    @Ignore
     public void testAddShop() throws Exception {
         Shop shop = new Shop();
         PersonInfo owner = new PersonInfo();
