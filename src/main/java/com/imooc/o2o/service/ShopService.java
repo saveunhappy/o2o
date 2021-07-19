@@ -1,5 +1,6 @@
 package com.imooc.o2o.service;
 
+import com.imooc.o2o.dto.ImageHolder;
 import com.imooc.o2o.dto.ShopExecution;
 import com.imooc.o2o.entity.Shop;
 import com.imooc.o2o.exceptions.ShopOperationException;
@@ -15,7 +16,7 @@ public interface ShopService {
      * @param pageSize 取多少条
      * @return DTO
      */
-    public ShopExecution getShopList(Shop shopCondition,int pageIndex,int pageSize);
+    ShopExecution getShopList(Shop shopCondition, int pageIndex, int pageSize);
 
     /**
      * 通过店铺Id获取店铺信息
@@ -26,12 +27,11 @@ public interface ShopService {
     /**
      *
      * @param shop 店铺信息
-     * @param shopImgInputStream 对图片的处理
-     * @param fileName 文件名称
+     * @param thumbnail 文件名称
      * @return DTO对象
      */
     //shopImgInputStream是无法获取到文件名字的，获取名字是要获取到拓展名
-    ShopExecution addShop(Shop shop, InputStream shopImgInputStream,String fileName) throws ShopOperationException;
+    ShopExecution addShop(Shop shop, ImageHolder thumbnail) throws ShopOperationException;
 
     /*
      * 修改店铺信息
@@ -41,5 +41,5 @@ public interface ShopService {
      * @return
      * @throws ShopOperationException
      */
-    ShopExecution modifyShop(Shop shop, InputStream shopImgInputStream,String fileName)throws ShopOperationException;
+    ShopExecution modifyShop(Shop shop, ImageHolder thumbnail)throws ShopOperationException;
 }

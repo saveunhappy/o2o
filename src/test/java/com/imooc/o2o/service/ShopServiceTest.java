@@ -1,6 +1,7 @@
 package com.imooc.o2o.service;
 
 import com.imooc.o2o.BaseTest;
+import com.imooc.o2o.dto.ImageHolder;
 import com.imooc.o2o.dto.ShopExecution;
 import com.imooc.o2o.entity.Area;
 import com.imooc.o2o.entity.PersonInfo;
@@ -40,7 +41,8 @@ public class ShopServiceTest extends BaseTest {
         shop.setShopId(1L);
         File shopImg = new File("D:\\360downloads\\2.jpg");
         InputStream inputStream = new FileInputStream(shopImg);
-        ShopExecution shopExecution = shopService.modifyShop(shop, inputStream, "2.jpg");
+        ImageHolder imageHolder = new ImageHolder("2.jpg",inputStream);
+        ShopExecution shopExecution = shopService.modifyShop(shop, imageHolder);
         System.out.println("新的图片地址为：" + shopExecution.getShop().getShopImg());
 
     }
@@ -70,7 +72,8 @@ public class ShopServiceTest extends BaseTest {
         shop.setAdvice("审核中");
         File shopImg = new File("D:\\dev\\xiaohuangren.jpg");
         InputStream is = new FileInputStream(shopImg);
-        ShopExecution shopExecution = shopService.addShop(shop, is, shopImg.getName());
+        ImageHolder imageHolder = new ImageHolder(shopImg.getName(),is);
+        ShopExecution shopExecution = shopService.addShop(shop, imageHolder);
         //因为成功了，才是CHECK的状态，不是的话，就是ShopOperationException抛出来了
         //这个返回的对象就是成功的时候才会返回，而且把值给设置进去了
         assertEquals(ShopStateEnum.CHECK.getState(), shopExecution.getState());

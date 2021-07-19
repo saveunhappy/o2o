@@ -1,6 +1,7 @@
 package com.imooc.o2o.controller.shopadmin;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.imooc.o2o.dto.ImageHolder;
 import com.imooc.o2o.dto.ShopExecution;
 import com.imooc.o2o.entity.Area;
 import com.imooc.o2o.entity.PersonInfo;
@@ -13,8 +14,6 @@ import com.imooc.o2o.service.ShopCategoryService;
 import com.imooc.o2o.service.ShopService;
 import com.imooc.o2o.util.CodeUtil;
 import com.imooc.o2o.util.HttpServletRequestUtil;
-import com.imooc.o2o.util.ImageUtils;
-import com.imooc.o2o.util.PathUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,10 +25,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -153,7 +149,7 @@ public class ShopManagementController {
         //1.接收并转化对应的参数，包括店铺信息以及图片信息
         String shopStr = HttpServletRequestUtil.getString(request, "shopStr");
         ObjectMapper mapper = new ObjectMapper();
-        Shop shop = null;
+        Shop shop;
         try {
             shop = mapper.readValue(shopStr, Shop.class);
         } catch (Exception e) {
@@ -174,7 +170,7 @@ public class ShopManagementController {
          * 把原来的File 可以直接传，可以获取文件名，拆分成了
          * CommonsMultipartFile获取文件流inputStream 和名字，就是拆成两个参数了。
          */
-        CommonsMultipartFile shopImg = null;
+        CommonsMultipartFile shopImg;
         CommonsMultipartResolver commonsMultipartResolver = new CommonsMultipartResolver(
                 request.getSession().getServletContext());
         //如果有上传的文件流
@@ -194,9 +190,11 @@ public class ShopManagementController {
             PersonInfo owner = (PersonInfo) request.getSession().getAttribute("user");
             //owner.setUserId(1L);有全部的信息了，这里就可以不用设置了
             shop.setOwner(owner);
-            ShopExecution se = null;
+
+            ShopExecution se;
             try {
-                se = shopService.addShop(shop, shopImg.getInputStream(), shopImg.getOriginalFilename());
+                ImageHolder imageHolder = new ImageHolder(shopImg.getOriginalFilename(),shopImg.getInputStream());
+                se = shopService.addShop(shop,imageHolder);
                 if (se.getState() == ShopStateEnum.CHECK.getState()) {
                     modelMap.put("success", true);
                     //用户可以操作的店铺列表,如果是null，那这次新建了，肯定是能够获取到，就新建一个List给塞进去
@@ -239,7 +237,7 @@ public class ShopManagementController {
         //1.接收并转化对应的参数，包括店铺信息以及图片信息
         String shopStr = HttpServletRequestUtil.getString(request, "shopStr");
         ObjectMapper mapper = new ObjectMapper();
-        Shop shop = null;
+        Shop shop;
         try {
             shop = mapper.readValue(shopStr, Shop.class);
         } catch (Exception e) {
@@ -258,12 +256,14 @@ public class ShopManagementController {
 
         //2.修改店铺
         if (shop != null && shop.getShopId() != null) {
-            ShopExecution se = null;
+            ShopExecution se;
             try {
                 if (shopImg == null) {
-                    se = shopService.modifyShop(shop, null, null);
+                    se = shopService.modifyShop(shop,  null);
                 } else {
-                    se = shopService.modifyShop(shop, shopImg.getInputStream(), shopImg.getOriginalFilename());
+                    ImageHolder imageHolder = new ImageHolder(shopImg.getOriginalFilename(),shopImg.getInputStream());
+
+                    se = shopService.modifyShop(shop, imageHolder);
                 }
                 if (se.getState() == ShopStateEnum.SUCCESS.getState()) {
                     modelMap.put("success", true);

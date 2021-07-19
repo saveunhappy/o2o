@@ -17,6 +17,8 @@ public class Product {
     private String imgAddr;
     //平常价格
     private String normalPrice;
+    // 商品积分
+    private Integer point;
     //打折后的价格
     private String promotionPrice;
     //权重
