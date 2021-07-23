@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
-
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -40,32 +39,35 @@ public class ShopManagementController {
     private ShopCategoryService shopCategoryService;
     @Autowired
     private AreaService areaService;
-    @GetMapping("getshopmanagementinfo")
+
+    @GetMapping("/getshopmanagementinfo")
     @ResponseBody
-    private Map<String, Object> getShopManagementInfo(HttpServletRequest request){
+    private Map<String, Object> getShopManagementInfo(HttpServletRequest request) {
         //这个页面就是店铺列表，是某个用户创建的许多店铺，
         Map<String, Object> modelMap = new HashMap<>();
         //尝试从request中去获取。
-        long shopId = HttpServletRequestUtil.getLong(request,"shopId");
-        if(shopId <= 0){
+        long shopId = HttpServletRequestUtil.getLong(request, "shopId");
+        if (shopId <= 0) {
             //获取不到就尝试从session中获取
             Object currentShopObj = request.getSession().getAttribute("currentShop");
             //如果还是获取不到，那就是没登录，
-            if(currentShopObj == null){
-                modelMap.put("redirect",true);
-                modelMap.put("url","/o2o/shopadmin/shoplist");
-            }else{
+            if (currentShopObj == null) {
+                modelMap.put("redirect", true);
+                modelMap.put("url", "/o2o/shopadmin/shoplist");
+            } else {
                 //这个就是虽然没有ShopId 但是有当前用户信息，用户信息包含着shopId
+                //这就是为啥第一次你先带着shopId来，然后你访问其他的东西就不需要在携带shopId了
+                //因为你第一次带着shopId来，就已经放到session中去了，
                 Shop currentShop = (Shop) currentShopObj;
-                modelMap.put("redirect",false);
-                modelMap.put("shopId",currentShop.getShopId());
+                modelMap.put("redirect", false);
+                modelMap.put("shopId", currentShop.getShopId());
             }
-        }else{
+        } else {
             //如果获取到了ShopId，那就放到Shop对象中去，
             Shop currentShop = new Shop();
             currentShop.setShopId(shopId);
-            request.getSession().setAttribute("currentShop",currentShop);
-            modelMap.put("redirect",false);
+            request.getSession().setAttribute("currentShop", currentShop);
+            modelMap.put("redirect", false);
         }
         return modelMap;
     }
@@ -118,7 +120,7 @@ public class ShopManagementController {
     }
 
 
-    @GetMapping("getshopinitinfo")
+    @GetMapping("/getshopinitinfo")
     @ResponseBody
     private Map<String, Object> getShopInitInfo() {
         Map<String, Object> modelMap = new HashMap<>();
@@ -193,8 +195,8 @@ public class ShopManagementController {
 
             ShopExecution se;
             try {
-                ImageHolder imageHolder = new ImageHolder(shopImg.getOriginalFilename(),shopImg.getInputStream());
-                se = shopService.addShop(shop,imageHolder);
+                ImageHolder imageHolder = new ImageHolder(shopImg.getOriginalFilename(), shopImg.getInputStream());
+                se = shopService.addShop(shop, imageHolder);
                 if (se.getState() == ShopStateEnum.CHECK.getState()) {
                     modelMap.put("success", true);
                     //用户可以操作的店铺列表,如果是null，那这次新建了，肯定是能够获取到，就新建一个List给塞进去
@@ -259,9 +261,9 @@ public class ShopManagementController {
             ShopExecution se;
             try {
                 if (shopImg == null) {
-                    se = shopService.modifyShop(shop,  null);
+                    se = shopService.modifyShop(shop, null);
                 } else {
-                    ImageHolder imageHolder = new ImageHolder(shopImg.getOriginalFilename(),shopImg.getInputStream());
+                    ImageHolder imageHolder = new ImageHolder(shopImg.getOriginalFilename(), shopImg.getInputStream());
 
                     se = shopService.modifyShop(shop, imageHolder);
                 }

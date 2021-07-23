@@ -49,6 +49,8 @@ $(function() {
 
 	$('.row').on('click', '.shop-classify', function(e) {
 		var shopCategoryId = e.currentTarget.dataset.category;
+		//这个就是二手店铺啥的，第一页，你要搜这个商铺下面的，那就把这个商铺的id作为
+		//parentId传送进去，就是看看谁的parentId是二手店铺，就可以查到列表了
 		var newUrl = '/o2o/frontend/shoplist?parentId=' + shopCategoryId;
 		window.location.href = newUrl;
 	});
