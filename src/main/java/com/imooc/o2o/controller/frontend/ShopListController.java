@@ -34,7 +34,13 @@ public class ShopListController {
 
 	/**
 	 * 返回商品列表页里的ShopCategory列表(二级或者一级)，以及区域信息列表
-	 * 
+	 * 就是首页的全部商店，你第一次访问，肯定是没有指定parentId的，所以首页就是parentId为null的ShopCategory
+	 * 顺带把区域列表也给一同返回回去了。http://localhost:8080/o2o/frontend/listshopspageinfo?parentId=
+	 * 当你要进入一个商品分类的时候，就有parentId了，你刚开始在index下面，比如你要进入二手市场，这个时候二手市场就作为一个parent了
+	 *  这个接口主要还是查询二级店铺，现在去看listshop                                                                                                                                parent_id
+	 * 10	二手市场	二手商品交易	/upload/images/item/shopcategory/2017061223272255687.png	100	2017-06-04 20:10:58	2017-06-12 23:27:22
+	 * 14	旧车	旧车	/upload/images/item/shopcategory/2017060420315183203.png	    80	2017-06-04 20:31:51	2017-06-04 20:31:51	10
+	 * 15	二手书籍	二手书籍	/upload/images/item/shopcategory/2017060420322333745.png	    79	2017-06-04 20:32:23	2017-06-04 20:32:23	10
 	 * @param request
 	 * @return
 	 */
@@ -83,7 +89,8 @@ public class ShopListController {
 
 	/**
 	 * 获取指定查询条件下的店铺列表
-	 * 
+	 * 上面那个就是在查询二级列表，这个就是详细的信息了，因为上面还是有button让你来选择的。
+	 * 分页信息啊，类别啊。街道啊，这个就是进一步区分
 	 * @param request
 	 * @return
 	 */

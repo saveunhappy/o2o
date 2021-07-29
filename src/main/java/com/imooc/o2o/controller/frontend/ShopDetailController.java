@@ -34,7 +34,8 @@ public class ShopDetailController {
 
 	/**
 	 * 获取店铺信息以及该店铺下面的商品类别列表
-	 * 
+	 * 商铺的类别，商铺的信息，区域，店铺下面的商品类别列表，就是那你店铺下面卖着各种各样的，吃的，喝的，玩的。
+	 *
 	 * @param request
 	 * @return
 	 */
@@ -79,7 +80,8 @@ public class ShopDetailController {
 		long shopId = HttpServletRequestUtil.getLong(request, "shopId");
 		// 空值判断
 		if ((pageIndex > -1) && (pageSize > -1) && (shopId > -1)) {
-			// 尝试获取商品类别Id
+			// 尝试获取商品类别Id，这个productCategoryId是/listshopdetailpageinfo里面的productCategoryList
+			//通过前端的js代码，迭代，把id和name显示出来了，然后调用这个接口就传送过来了
 			long productCategoryId = HttpServletRequestUtil.getLong(request, "productCategoryId");
 			// 尝试获取模糊查找的商品名
 			String productName = HttpServletRequestUtil.getString(request, "productName");

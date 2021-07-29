@@ -24,7 +24,7 @@ public class ProductDetailController {
 
 	/**
 	 * 根据商品Id获取商品详情
-	 * 
+	 * 这个就是商品的详情图了，目前还是好几个图重叠的。
 	 * @param request
 	 * @return
 	 */

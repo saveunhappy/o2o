@@ -27,6 +27,8 @@ public class MainPageController {
 
 	/**
 	 * 初始化前端展示系统的主页信息，包括获取一级店铺类别列表以及头条列表
+	 * 就是首页的ShopCategory，你第一次访问，肯定是没有指定parentId的，所以首页就是parentId为null的ShopCategory
+	 * 顺带把区域列表也给一同返回回去了。
 	 * 
 	 * @return
 	 */
