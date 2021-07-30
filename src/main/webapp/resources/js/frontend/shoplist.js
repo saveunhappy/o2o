@@ -51,6 +51,7 @@ $(function () {
                     });
                 // 将拼接好的类别标签嵌入前台的html组件里
                 $('#shoplist-search-div').html(html);
+                //这里没错，全部街道默认就是查询所有的，也算是一个查询条件，下面的就是各个街道了。
                 var selectOptions = '<option value="">全部街道</option>';
                 // 获取后台返回过来的区域信息列表
                 var areaList = data.areaList;
@@ -79,6 +80,8 @@ $(function () {
             + pageSize + '&parentId=' + parentId + '&areaId=' + areaId
             + '&shopCategoryId=' + shopCategoryId + '&shopName=' + shopName;
         // 设定加载符，若还在后台取数据则不能再次访问后台，避免多次重复加载
+        //TODO 是不是很疑惑，这个不是拼接的吗？为什么方法名叫addItems，为什么这个loading好像没有用到，
+        //这个是suimobile自己定义的，下面还有刷新的逻辑呢，是框架内部自己定义的。 $.refreshScroller();
         loading = true;
         // 访问后台获取相应查询条件下的店铺列表
         $.getJSON(url, function (data) {
@@ -105,7 +108,8 @@ $(function () {
                         + '更新</p>' + '<span>点击查看</span>' + '</div>'
                         + '</div>';
                 });
-                // 将卡片集合添加到目标HTML组件里
+                // 将卡片集合添加到目标HTML组件里，
+                // TODO 这里是进行append的，也没有那么神奇,我说分页怎么实现的呢，原来是一直append
                 $('.list-div').append(html);
                 // 获取目前为止已显示的卡片总数，包含之前已经加载的
                 var total = $('.list-div .card').length;
@@ -128,6 +132,7 @@ $(function () {
     }
 
     // 下滑屏幕自动进行分页搜索
+    //TODO loding在这里起作用了
     $(document).on('infinite', '.infinite-scroll-bottom', function () {
         if (loading)
             return;

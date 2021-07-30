@@ -60,7 +60,8 @@ public class DynamicDataSourceInterceptor implements Interceptor {
 
     @Override
     public Object plugin(Object target) {
-        //只要有增删改查的操作就拦截下来，所有的操作都在Executor中
+        //只要有增删改查的操作就拦截下来，所有的操作都在Executor中,Wrap就是进行增强，哪个拦截器呢？就是本身
+        //this对象。
         if (target instanceof Executor) {
             return Plugin.wrap(target, this);
         } else {

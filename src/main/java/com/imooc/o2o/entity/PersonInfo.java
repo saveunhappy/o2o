@@ -11,7 +11,7 @@ public class PersonInfo {
     //用户名称
     private String name;
     //用户头像，是一个url
-    private String profileImage;
+    private String profileImg;
     //用户邮箱
     private String email;
     //用户性别
