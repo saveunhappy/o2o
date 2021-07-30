@@ -1,6 +1,7 @@
 com\imooc\o2o\service\AreaService.class
 com\imooc\o2o\dao\PersonInfoDao.class
 com\imooc\o2o\entity\ShopCategory.class
+com\imooc\o2o\service\PersonInfoService.class
 com\imooc\o2o\service\impl\ProductServiceImpl.class
 com\imooc\o2o\exceptions\ProductCategoryOperationException.class
 com\imooc\o2o\service\HeadLineService.class
@@ -10,12 +11,15 @@ com\imooc\o2o\util\wechat\SignUtil.class
 com\imooc\o2o\controller\frontend\FrontendController.class
 com\imooc\o2o\dao\HeadLineDao.class
 com\imooc\o2o\dto\ShopExecution.class
+com\imooc\o2o\service\WechatAuthService.class
 com\imooc\o2o\enums\HeadLineStateEnum.class
 com\imooc\o2o\controller\frontend\MainPageController.class
 com\imooc\o2o\entity\ProductImg.class
 com\imooc\o2o\dao\AreaDao.class
+com\imooc\o2o\dto\PersonInfoExecution.class
 com\imooc\o2o\util\wechat\MyX509TrustManager.class
 com\imooc\o2o\controller\shopadmin\ProductManagementController.class
+com\imooc\o2o\enums\WechatAuthStateEnum.class
 com\imooc\o2o\service\impl\ShopServiceImpl.class
 com\imooc\o2o\dto\ImageHolder.class
 com\imooc\o2o\service\ShopService.class
@@ -23,6 +27,7 @@ com\imooc\o2o\dao\ProductDao.class
 com\imooc\o2o\controller\frontend\ProductDetailController.class
 com\imooc\o2o\dao\ShopCategoryDao.class
 com\imooc\o2o\enums\ShopStateEnum.class
+com\imooc\o2o\service\impl\PersonInfoServiceImpl.class
 com\imooc\o2o\service\ProductCategoryService.class
 com\imooc\o2o\entity\HeadLine.class
 com\imooc\o2o\dao\ProductImgDao.class
@@ -30,6 +35,7 @@ com\imooc\o2o\dto\ProductExecution.class
 com\imooc\o2o\entity\WechatAuth.class
 com\imooc\o2o\enums\ProductCategoryStateEnum.class
 com\imooc\o2o\service\impl\HeadLineServiceImpl.class
+com\imooc\o2o\exceptions\WechatAuthOperationException.class
 com\imooc\o2o\service\ShopCategoryService.class
 com\imooc\o2o\util\ImageUtil.class
 com\imooc\o2o\entity\Product.class
@@ -38,6 +44,7 @@ com\imooc\o2o\util\HttpServletRequestUtil.class
 com\imooc\o2o\dao\split\DynamicDataSourceHolder.class
 com\imooc\o2o\dao\split\DynamicDataSourceInterceptor.class
 com\imooc\o2o\dto\Result.class
+com\imooc\o2o\service\impl\WechatAuthServiceImpl.class
 com\imooc\o2o\entity\Shop.class
 com\imooc\o2o\controller\frontend\ShopDetailController.class
 com\imooc\o2o\dao\ShopDao.class
@@ -48,11 +55,13 @@ com\imooc\o2o\exceptions\ProductOperationException.class
 com\imooc\o2o\util\wechat\WechatUtil.class
 com\imooc\o2o\controller\shopadmin\ShopManagementController.class
 com\imooc\o2o\service\impl\ShopCategoryServiceImpl.class
+com\imooc\o2o\exceptions\PersonInfoOperationException.class
 com\imooc\o2o\entity\LocalAuth.class
 com\imooc\o2o\dto\UserAccessToken.class
 com\imooc\o2o\service\ProductService.class
 com\imooc\o2o\controller\shopadmin\ProductCategoryManagementController.class
 com\imooc\o2o\entity\PersonInfo.class
+com\imooc\o2o\enums\PersonInfoStateEnum.class
 com\imooc\o2o\util\PageCalculator.class
 com\imooc\o2o\controller\frontend\ShopListController.class
 com\imooc\o2o\dao\split\DynamicDataSource.class
@@ -67,3 +76,4 @@ com\imooc\o2o\service\impl\AreaServiceImpl.class
 com\imooc\o2o\controller\superadmin\AreaController.class
 com\imooc\o2o\enums\ProductStateEnum.class
 com\imooc\o2o\service\impl\ProductCategoryServiceImpl.class
+com\imooc\o2o\dto\WechatAuthExecution.class

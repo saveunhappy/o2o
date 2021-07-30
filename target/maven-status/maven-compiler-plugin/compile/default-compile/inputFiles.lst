@@ -4,6 +4,7 @@ D:\devCode\o2o\src\main\java\com\imooc\o2o\dao\PersonInfoDao.java
 D:\devCode\o2o\src\main\java\com\imooc\o2o\exceptions\ShopOperationException.java
 D:\devCode\o2o\src\main\java\com\imooc\o2o\controller\shopadmin\ShopManagementController.java
 D:\devCode\o2o\src\main\java\com\imooc\o2o\entity\Product.java
+D:\devCode\o2o\src\main\java\com\imooc\o2o\dto\WechatAuthExecution.java
 D:\devCode\o2o\src\main\java\com\imooc\o2o\entity\Shop.java
 D:\devCode\o2o\src\main\java\com\imooc\o2o\dao\ShopCategoryDao.java
 D:\devCode\o2o\src\main\java\com\imooc\o2o\dto\ImageHolder.java
@@ -25,14 +26,20 @@ D:\devCode\o2o\src\main\java\com\imooc\o2o\dao\ProductCategoryDao.java
 D:\devCode\o2o\src\main\java\com\imooc\o2o\dto\ShopExecution.java
 D:\devCode\o2o\src\main\java\com\imooc\o2o\controller\shopadmin\ShopAdminController.java
 D:\devCode\o2o\src\main\java\com\imooc\o2o\service\impl\ProductCategoryServiceImpl.java
+D:\devCode\o2o\src\main\java\com\imooc\o2o\exceptions\PersonInfoOperationException.java
+D:\devCode\o2o\src\main\java\com\imooc\o2o\service\impl\WechatAuthServiceImpl.java
 D:\devCode\o2o\src\main\java\com\imooc\o2o\enums\ShopStateEnum.java
 D:\devCode\o2o\src\main\java\com\imooc\o2o\util\PathUtil.java
 D:\devCode\o2o\src\main\java\com\imooc\o2o\dao\split\DynamicDataSourceHolder.java
 D:\devCode\o2o\src\main\java\com\imooc\o2o\service\impl\ShopCategoryServiceImpl.java
 D:\devCode\o2o\src\main\java\com\imooc\o2o\dao\ProductImgDao.java
 D:\devCode\o2o\src\main\java\com\imooc\o2o\dao\HeadLineDao.java
+D:\devCode\o2o\src\main\java\com\imooc\o2o\enums\PersonInfoStateEnum.java
 D:\devCode\o2o\src\main\java\com\imooc\o2o\service\impl\HeadLineServiceImpl.java
 D:\devCode\o2o\src\main\java\com\imooc\o2o\util\wechat\SignUtil.java
+D:\devCode\o2o\src\main\java\com\imooc\o2o\service\WechatAuthService.java
+D:\devCode\o2o\src\main\java\com\imooc\o2o\service\PersonInfoService.java
+D:\devCode\o2o\src\main\java\com\imooc\o2o\service\impl\PersonInfoServiceImpl.java
 D:\devCode\o2o\src\main\java\com\imooc\o2o\dao\AreaDao.java
 D:\devCode\o2o\src\main\java\com\imooc\o2o\dto\Result.java
 D:\devCode\o2o\src\main\java\com\imooc\o2o\entity\Area.java
@@ -41,6 +48,7 @@ D:\devCode\o2o\src\main\java\com\imooc\o2o\service\impl\ShopServiceImpl.java
 D:\devCode\o2o\src\main\java\com\imooc\o2o\controller\frontend\MainPageController.java
 D:\devCode\o2o\src\main\java\com\imooc\o2o\controller\frontend\ProductDetailController.java
 D:\devCode\o2o\src\main\java\com\imooc\o2o\controller\superadmin\AreaController.java
+D:\devCode\o2o\src\main\java\com\imooc\o2o\dto\PersonInfoExecution.java
 D:\devCode\o2o\src\main\java\com\imooc\o2o\entity\HeadLine.java
 D:\devCode\o2o\src\main\java\com\imooc\o2o\controller\shopadmin\ProductManagementController.java
 D:\devCode\o2o\src\main\java\com\imooc\o2o\dao\split\DynamicDataSourceInterceptor.java
@@ -57,8 +65,10 @@ D:\devCode\o2o\src\main\java\com\imooc\o2o\service\ProductService.java
 D:\devCode\o2o\src\main\java\com\imooc\o2o\dto\ProductExecution.java
 D:\devCode\o2o\src\main\java\com\imooc\o2o\util\wechat\MyX509TrustManager.java
 D:\devCode\o2o\src\main\java\com\imooc\o2o\enums\HeadLineStateEnum.java
+D:\devCode\o2o\src\main\java\com\imooc\o2o\exceptions\WechatAuthOperationException.java
 D:\devCode\o2o\src\main\java\com\imooc\o2o\util\HttpServletRequestUtil.java
 D:\devCode\o2o\src\main\java\com\imooc\o2o\dao\ProductDao.java
+D:\devCode\o2o\src\main\java\com\imooc\o2o\enums\WechatAuthStateEnum.java
 D:\devCode\o2o\src\main\java\com\imooc\o2o\entity\WechatAuth.java
 D:\devCode\o2o\src\main\java\com\imooc\o2o\exceptions\ProductCategoryOperationException.java
 D:\devCode\o2o\src\main\java\com\imooc\o2o\dao\ShopDao.java

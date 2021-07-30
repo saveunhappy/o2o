@@ -1,0 +1,14 @@
+com\imooc\o2o\dao\ShopCategoryDaoTest.class
+com\imooc\o2o\service\WechatAuthServiceTest.class
+com\imooc\o2o\dao\PersonInfoDaoTest.class
+com\imooc\o2o\dao\ProductDaoTest.class
+com\imooc\o2o\dao\HeadLineDaoTest.class
+com\imooc\o2o\BaseTest.class
+com\imooc\o2o\dao\AreaDaoTest.class
+com\imooc\o2o\service\AreaServiceTest.class
+com\imooc\o2o\service\ShopServiceTest.class
+com\imooc\o2o\dao\ProductCategoryDaoTest.class
+com\imooc\o2o\dao\WechatAuthDaoTest.class
+com\imooc\o2o\dao\ShopDaoTest.class
+com\imooc\o2o\service\ProductServiceTest.class
+com\imooc\o2o\dao\ProductImgDaoTest.class
