@@ -38,6 +38,7 @@ D:\devCode\o2o\src\main\java\com\imooc\o2o\enums\PersonInfoStateEnum.java
 D:\devCode\o2o\src\main\java\com\imooc\o2o\service\impl\HeadLineServiceImpl.java
 D:\devCode\o2o\src\main\java\com\imooc\o2o\util\wechat\SignUtil.java
 D:\devCode\o2o\src\main\java\com\imooc\o2o\service\WechatAuthService.java
+D:\devCode\o2o\src\main\java\com\imooc\o2o\util\EncryptPropertyPlaceholderConfigurer.java
 D:\devCode\o2o\src\main\java\com\imooc\o2o\service\PersonInfoService.java
 D:\devCode\o2o\src\main\java\com\imooc\o2o\service\impl\PersonInfoServiceImpl.java
 D:\devCode\o2o\src\main\java\com\imooc\o2o\dao\AreaDao.java
@@ -55,6 +56,7 @@ D:\devCode\o2o\src\main\java\com\imooc\o2o\dao\split\DynamicDataSourceIntercepto
 D:\devCode\o2o\src\main\java\com\imooc\o2o\service\impl\AreaServiceImpl.java
 D:\devCode\o2o\src\main\java\com\imooc\o2o\enums\ProductCategoryStateEnum.java
 D:\devCode\o2o\src\main\java\com\imooc\o2o\util\CodeUtil.java
+D:\devCode\o2o\src\main\java\com\imooc\o2o\util\DESUtil.java
 D:\devCode\o2o\src\main\java\com\imooc\o2o\service\ShopCategoryService.java
 D:\devCode\o2o\src\main\java\com\imooc\o2o\dto\UserAccessToken.java
 D:\devCode\o2o\src\main\java\com\imooc\o2o\service\ProductCategoryService.java
