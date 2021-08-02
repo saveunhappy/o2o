@@ -15,7 +15,7 @@ public class LocalAuth {
     //创建时间
     private Date createTime;
     //最后修改时间
-    private String lastEditTime;
+    private Date lastEditTime;
     //和用户信息相关联
     private PersonInfo personInfo;
 }

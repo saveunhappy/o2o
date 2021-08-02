@@ -3,7 +3,7 @@ package com.imooc.o2o.entity;
 import lombok.Data;
 
 import java.util.Date;
-
+//这个其实也是微信实体类和自定义结合的，比如这里的name就是微信里面的nickname
 @Data
 public class PersonInfo {
     //用户id
