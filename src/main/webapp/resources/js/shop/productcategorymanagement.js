@@ -60,7 +60,10 @@ $(function() {
 			success : function(data) {
 				if (data.success) {
 					$.toast('提交成功！');
+<<<<<<< HEAD
+=======
 					//提交成功后立马再查询一遍，能立马看到效果
+>>>>>>> origin/feature/basic
 					getList();
 				} else {
 					$.toast('提交失败！');
@@ -89,7 +92,10 @@ $(function() {
 						success : function(data) {
 							if (data.success) {
 								$.toast('删除成功！');
+<<<<<<< HEAD
+=======
 								//删除过后立马去调用getList()方法，查询到最新的状态
+>>>>>>> origin/feature/basic
 								getList();
 							} else {
 								$.toast('删除失败！');
