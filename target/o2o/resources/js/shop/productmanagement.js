@@ -27,6 +27,7 @@ $(function() {
 					if (item.enableStatus === 0) {
 >>>>>>> origin/feature/basic
 						// 若状态值为0，表明是已下架的商品，操作变为上架(即点击上架按钮上架相关商品)
+						//因为显示的就应该是相反的，你现在是下架的，你看到的就应该是上架，
 						textOp = "上架";
 						contraryStatus = 1;
 					} else {
@@ -79,6 +80,7 @@ $(function() {
 									+ e.currentTarget.dataset.id;
 						} else if (target.hasClass('status')) {
 							// 如果有class status则调用后台功能上/下架相关商品，并带有productId参数
+							//data-status的值就是contraryStatus,每次上下架之后，状态都会变
 							changeItemStatus(e.currentTarget.dataset.id,
 									e.currentTarget.dataset.status);
 						} else if (target.hasClass('preview')) {

@@ -8,30 +8,21 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @RequestMapping(value = "shopadmin", method = {RequestMethod.GET})
 public class ShopAdminController {
+    //店铺操作添加修改
     @GetMapping("/shopoperation")
     public String shopOperation() {
         return "shop/shopoperation";
     }
-<<<<<<< HEAD
-
-=======
     //店铺列表
->>>>>>> origin/feature/basic
     @GetMapping("/shoplist")
     public String shoplist() {
         return "shop/shoplist";
     }
-<<<<<<< HEAD
-
-=======
-    //商品管理页，就是商铺信息，商品管理，类别管理之类的。
->>>>>>> origin/feature/basic
+    //商品管理页，就是商铺信息，商品管理，类别管理之类的，有几个按钮
     @GetMapping("/shopmanagement")
     public String shopManagement() {
         return "shop/shopmanagement";
     }
-<<<<<<< HEAD
-=======
     //商品分类，有优先级的那个
     @GetMapping("/productcategorymanagement")
     public String shopProductCategoryManagement() {
@@ -42,9 +33,9 @@ public class ShopAdminController {
     public String productOperation(){
         return "shop/productoperation";
     }
+    //商品管理
     @GetMapping("/productmanagement")
     public String productManagement(){
         return "shop/productmanagement";
     }
->>>>>>> origin/feature/basic
 }

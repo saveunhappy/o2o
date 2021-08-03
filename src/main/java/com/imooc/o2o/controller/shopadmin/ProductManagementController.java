@@ -113,14 +113,14 @@ public class ProductManagementController {
 		// 接收前端参数的变量的初始化，包括商品，缩略图，详情图列表实体类
 		ObjectMapper mapper = new ObjectMapper();
 		Product product;
-		ImageHolder thumbnail = null;
+		ImageHolder thumbnail;
 		List<ImageHolder> productImgList = new ArrayList<>();
 		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(
 				request.getSession().getServletContext());
 		try {
 			// 若请求中存在文件流，则取出相关的文件（包括缩略图和详情图）
 			if (multipartResolver.isMultipart(request)) {
-				thumbnail = handleImage(request, thumbnail, productImgList);
+				thumbnail = handleImage(request,productImgList);
 			} else {
 				modelMap.put("success", false);
 				modelMap.put("errMsg", "上传图片不能为空");
@@ -166,9 +166,10 @@ public class ProductManagementController {
 		return modelMap;
 	}
 
-	private ImageHolder handleImage(HttpServletRequest request, ImageHolder thumbnail, List<ImageHolder> productImgList)
+	private ImageHolder handleImage(HttpServletRequest request, List<ImageHolder> productImgList)
 			throws IOException {
 		//MultipartHttpServletRequest里面有那个图片的一大堆信息
+		ImageHolder thumbnail = null;
 		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 		// 取出缩略图并构建ImageHolder对象
 		CommonsMultipartFile thumbnailFile = (CommonsMultipartFile) multipartRequest.getFile("thumbnail");
@@ -221,7 +222,7 @@ public class ProductManagementController {
 		// 若请求中存在文件流，则取出相关的文件（包括缩略图和详情图）
 		try {
 			if (multipartResolver.isMultipart(request)) {
-				thumbnail = handleImage(request, thumbnail, productImgList);
+				thumbnail = handleImage(request, productImgList);
 			}
 		} catch (Exception e) {
 			modelMap.put("success", false);

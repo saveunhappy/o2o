@@ -28,10 +28,12 @@
 
     </resultMap>
     <select id="queryShopList" resultMap="shopMap">
-        SELECT s.shop_id,
+        SELECT
+        s.shop_id,
         s.shop_name,
         s.shop_desc,
         s.shop_addr,
+        s.phone,
         s.shop_img,
         s.priority,
         s.create_time,
@@ -41,20 +43,30 @@
         a.area_id,
         a.area_name,
         sc.shop_category_id,
-        sc.shop_category_name,
-        p.user_id
-        FROM tb_shop s,
+        sc.shop_category_name
+        FROM
+        tb_shop s,
         tb_area a,
-        tb_shop_category sc,
-        tb_person_info p
+        tb_shop_category sc
         <where>
-            <if test="shopCondition.shopCategory != null  and
-                shopCondition.shopCategory.shopCategoryId != null">
+            <if
+                    test="shopCondition.shopCategory != null and
+			shopCondition.shopCategory.shopCategoryId != null">
                 and s.shop_category_id =
                 #{shopCondition.shopCategory.shopCategoryId}
             </if>
-            <if test="shopCondition.area != null  and
-                shopCondition.area.areaId != null">
+            <if
+                    test="shopCondition.shopCategory != null
+			and shopCondition.shopCategory.parent!=null
+			and shopCondition.shopCategory.parent.shopCategoryId !=null">
+                and s.shop_category_id in (select shop_category_id from
+                tb_shop_category
+                WHERE parent_id =
+                #{shopCondition.shopCategory.parent.shopCategoryId})
+            </if>
+            <if
+                    test="shopCondition.area != null and
+			shopCondition.area.areaId != null">
                 and s.area_id =
                 #{shopCondition.area.areaId}
             </if>
@@ -64,20 +76,19 @@
             <if test="shopCondition.enableStatus != null">
                 and s.enable_status = #{shopCondition.enableStatus}
             </if>
-            <if test="shopCondition.owner != null and shopCondition.owner.userId != null">
+            <if
+                    test="shopCondition.owner != null and shopCondition.owner.userId != null">
                 and s.owner_id = #{shopCondition.owner.userId}
             </if>
             AND
-            s.area_id = a.area_id
+            s.area_id=a.area_id
             AND
             s.shop_category_id = sc.shop_category_id
         </where>
         ORDER BY
         s.priority DESC
-        LIMIT #{rowIndex},#{pageSize}
-
+        LIMIT #{rowIndex},#{pageSize};
     </select>
-
     <select id="queryShopCount" resultType="int">
         SELECT
         count(1)
@@ -86,13 +97,24 @@
         tb_area a,
         tb_shop_category sc
         <where>
-            <if test="shopCondition.shopCategory != null  and
-                shopCondition.shopCategory.shopCategoryId != null">
+            <if
+                    test="shopCondition.shopCategory != null and
+			shopCondition.shopCategory.shopCategoryId != null">
                 and s.shop_category_id =
                 #{shopCondition.shopCategory.shopCategoryId}
             </if>
-            <if test="shopCondition.area != null  and
-                shopCondition.area.areaId != null">
+            <if
+                    test="shopCondition.shopCategory != null
+			and shopCondition.shopCategory.parent!=null
+			and shopCondition.shopCategory.parent.shopCategoryId !=null">
+                and s.shop_category_id in (select shop_category_id from
+                tb_shop_category
+                WHERE parent_id =
+                #{shopCondition.shopCategory.parent.shopCategoryId})
+            </if>
+            <if
+                    test="shopCondition.area != null and
+			shopCondition.area.areaId != null">
                 and s.area_id =
                 #{shopCondition.area.areaId}
             </if>
@@ -102,11 +124,12 @@
             <if test="shopCondition.enableStatus != null">
                 and s.enable_status = #{shopCondition.enableStatus}
             </if>
-            <if test="shopCondition.owner != null and shopCondition.owner.userId != null">
+            <if
+                    test="shopCondition.owner != null and shopCondition.owner.userId != null">
                 and s.owner_id = #{shopCondition.owner.userId}
             </if>
             AND
-            s.area_id = a.area_id
+            s.area_id=a.area_id
             AND
             s.shop_category_id = sc.shop_category_id
         </where>
