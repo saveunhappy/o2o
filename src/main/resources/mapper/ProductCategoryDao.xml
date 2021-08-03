@@ -20,6 +20,8 @@
 		ORDER BY
 		priority DESC
 	</select>
+<<<<<<< HEAD
+=======
 	<insert id="batchInsertProductCategory" parameterType="java.util.List">
 		INSERT INTO
 		tb_product_category(product_category_name, priority,
@@ -42,6 +44,7 @@
 		product_category_id = #{productCategoryId}
 		AND shop_id = #{shopId}
 	</delete>
+>>>>>>> origin/feature/basic
 <!--	<insert id="batchInsertProductCategory" parameterType="java.util.List">-->
 <!--		INSERT INTO-->
 <!--		tb_product_category(product_category_name, priority,-->
@@ -64,4 +67,8 @@
 <!--		product_category_id = #{productCategoryId}-->
 <!--		AND shop_id = #{shopId}-->
 <!--	</delete>-->
+<<<<<<< HEAD
+</mapper>	
+=======
 </mapper>
+>>>>>>> origin/feature/basic
