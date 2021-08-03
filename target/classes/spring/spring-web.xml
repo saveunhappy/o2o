@@ -46,14 +46,20 @@
 		<mvc:interceptor>
 			<mvc:mapping path="/shopadmin/**" />
 			<!-- shoplist page -->
-<!--			<mvc:exclude-mapping path="/shopadmin/shoplist" />-->
-<!--			<mvc:exclude-mapping path="/shopadmin/getshoplist" />-->
+<!--			这个是前端的路由，就是要跳页面的，跳页面就是要去登录的，这个拦截了，就没办法获取信息了-->
+			<mvc:exclude-mapping path="/shopadmin/shoplist" />
+<!--			这个是去获取的，不能拦截-->
+			<mvc:exclude-mapping path="/shopadmin/getshoplist" />
 			<!-- shopregister page -->
+<!--			这个也是路由-->
 			<mvc:exclude-mapping path="/shopadmin/getshopinitinfo" />
+<!--			这个是注册的逻辑，也不能拦截-->
 			<mvc:exclude-mapping path="/shopadmin/registershop" />
 			<mvc:exclude-mapping path="/shopadmin/shopoperation" />
 			<!-- shopmanage page -->
+<!--			这个是路由-->
 			<mvc:exclude-mapping path="/shopadmin/shopmanagement" />
+<!--			这个是路由转发的信息-->
 			<mvc:exclude-mapping path="/shopadmin/getshopmanagementinfo" />
 			<bean id="ShopPermissionInterceptor"
 				  class="com.imooc.o2o.interceptor.shopadmin.ShopPermissionInterceptor" />
