@@ -26,10 +26,6 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-<<<<<<< HEAD
-import java.io.InputStream;
-=======
->>>>>>> origin/feature/basic
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -248,11 +244,7 @@ public class ShopManagementController {
         //1.接收并转化对应的参数，包括店铺信息以及图片信息
         String shopStr = HttpServletRequestUtil.getString(request, "shopStr");
         ObjectMapper mapper = new ObjectMapper();
-<<<<<<< HEAD
-        Shop shop = null;
-=======
         Shop shop;
->>>>>>> origin/feature/basic
         try {
             shop = mapper.readValue(shopStr, Shop.class);
         } catch (Exception e) {
@@ -271,23 +263,14 @@ public class ShopManagementController {
 
         //2.修改店铺
         if (shop != null && shop.getShopId() != null) {
-<<<<<<< HEAD
-            ShopExecution se = null;
-            try {
-                if (shopImg == null) {
-                    se = shopService.modifyShop(shop, null, null);
-                } else {
-                    se = shopService.modifyShop(shop, shopImg.getInputStream(), shopImg.getOriginalFilename());
-=======
+
             ShopExecution se;
             try {
                 if (shopImg == null) {
                     se = shopService.modifyShop(shop, null);
                 } else {
                     ImageHolder imageHolder = new ImageHolder(shopImg.getOriginalFilename(), shopImg.getInputStream());
-
                     se = shopService.modifyShop(shop, imageHolder);
->>>>>>> origin/feature/basic
                 }
                 if (se.getState() == ShopStateEnum.SUCCESS.getState()) {
                     modelMap.put("success", true);
